@@ -1,19 +1,19 @@
 <launch>
-<!-- Get location of configuration files from node creator -->
-  <arg name="config_pkg" doc="Name of package containing robot and map config files\nEx: ssr_stage" />
-  <arg name="config_folder" doc="Folder containing robot and map config files, relative to config_pkg root\nEx: config/minibot" />
-
-  <!--- Run AMCL -->
-  <include file="$(find amcl)/examples/amcl_diff.launch" />
+  <!-- Get location of configuration files from node creator -->
+  <arg name="config_path" doc="path to folder containing naviagtion config" />
+  <arg name="prefix" doc="prefix including final slash" />
 
   <!-- Define your move_base node -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <rosparam file="$(find $(arg config_pkg))/$(arg config_folder)/costmap_common_params.yaml" command="load" ns="global_costmap"/>
-    <rosparam file="$(find $(arg config_pkg))/$(arg config_folder)/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find $(arg config_pkg))/$(arg config_folder)/local_costmap_params.yaml"  command="load" />
-    <rosparam file="$(find $(arg config_pkg))/$(arg config_folder)/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find $(arg config_pkg))/$(arg config_folder)/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(arg config_path)/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(arg config_path)/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(arg config_path)/local_costmap_params.yaml"  command="load" />
+    <rosparam file="$(arg config_path)/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(arg config_path)/base_local_planner_params.yaml" command="load" />
 
-    <remap from="map" to="/map" />
+    <remap from="cmd_vel" to="$(arg prefix)/cmd_vel" />
+    <remap from="odom" to="$(arg prefix)/odom" />
+    <remap from="base_pose_ground_truth" to="$(arg prefix)/base_pose_ground_truth" />
+
   </node>
 </launch>
