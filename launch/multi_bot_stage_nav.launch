@@ -1,0 +1,59 @@
+<launch>
+
+    <master auto="start"/>
+    <param name="/use_sim_time" value="true"/>
+
+    <arg name="stage_sim" doc="specify a launch file from ssr_stage" default="multi_bot_empty.launch" />
+
+    <group ns="robot_1">
+        <!-- Localization through AMCL -->
+        <param name="tf_prefix" value="robot_1" />
+        <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml"/>
+
+        <!-- Move Base -->
+        <include file="$(find multi_robot_path_planner)/launch/move_base.launch" >
+            <arg name="config_path" value="$(find ssr_stage)/nav_config/dumper" />
+            <arg name="prefix" value="robot_1/" />
+        </include>
+
+        <remap from="map" to="/map" />
+    </group>
+
+    <group ns="robot_2">
+        <!-- Localization through AMCL -->
+        <param name="tf_prefix" value="robot_2" />
+        <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml"/>
+
+        <!-- Move Base -->
+        <include file="$(find multi_robot_path_planner)/launch/move_base.launch" >
+            <arg name="config_path" value="$(find ssr_stage)/nav_config/digger" />
+            <arg name="prefix" value="robot_2/" />
+        </include>
+
+        <remap from="map" to="/map" />
+    </group>
+
+    <group ns="robot_0">
+        <!-- Localization through AMCL -->
+        <param name="tf_prefix" value="robot_0" />
+        <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml"/>
+
+        <!-- Move Base -->
+        <include file="$(find multi_robot_path_planner)/launch/move_base.launch" >
+            <arg name="config_path" value="$(find ssr_stage)/nav_config/transporter" />
+            <arg name="prefix" value="robot_0/" />
+        </include>
+
+        <remap from="map" to="/map" />
+    </group>
+
+    <!-- Mapping -->
+    <include file="$(find multi_robot_path_planner)/move_base_config/slam_gmapping.xml"/>
+
+    <!-- Stage -->
+    <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
+
+    <!-- Visualization with RVIZ -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/single_robot.rviz" />
+
+</launch>
