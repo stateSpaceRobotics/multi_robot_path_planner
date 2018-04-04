@@ -1,0 +1,31 @@
+<launch>
+
+    <master auto="start"/>
+    <param name="/use_sim_time" value="true"/>
+
+    <arg name="stage_sim" doc="specify a launch file from ssr_stage" default="single_bot_empty.launch" />
+    <arg name="config_path" doc="path to folder containing naviagtion config" default="$(find ssr_stage)/nav_config/dumper" />
+    <arg name="prefix" doc="prefix including final slash" default="dumper"/>
+    <arg name="map_file" default="$(find ssr_stage)/maps/stage_empty.yaml" />
+
+    <!-- Move Base -->
+     <include file="$(find multi_robot_path_planner)/launch/move_base.launch" >
+        <arg name="config_path" value="$(arg config_path)" />
+        <arg name="prefix" value="$(arg prefix)" />
+    </include>
+
+    <!-- Mapping -->
+    <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" respawn="false" >
+        <param name="frame_id" value="/map" />
+    </node>
+
+    <!-- Stage -->
+    <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
+
+    <!-- Localization through AMCL -->
+    <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml"/>
+
+    <!-- Visualization with RVIZ -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/single_robot.rviz" />
+
+</launch>

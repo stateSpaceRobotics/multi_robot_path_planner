@@ -19,9 +19,6 @@
     <!-- Stage -->
     <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
 
-    <!-- Localization through AMCL -->
-    <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml"/>
-
     <!-- Visualization with RVIZ -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/single_robot.rviz" />
 
