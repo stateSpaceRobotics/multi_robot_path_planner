@@ -1,6 +1,6 @@
 <launch>
     <arg name="stage_sim"   default="single_bot_empty.launch" />
-    <arg name="map_file"    default="$(find ssr_stage)/maps/stage_empty.yaml" />
+    <arg name="map_file"    default="stage_empty.yaml" />
     <arg name="waypoints"   default='0' />
     <arg name="robotName1"  default="dumper" />
 
@@ -8,7 +8,7 @@
     <param name="/use_sim_time" value="true"/>
 
     <!-- Mapping -->
-    <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" respawn="false" >
+    <node pkg="map_server" type="map_server" name="map_server" args="$(find ssr_stage)/maps/$(arg map_file)" respawn="false" >
         <param name="frame_id" value="/map" />
     </node>
 

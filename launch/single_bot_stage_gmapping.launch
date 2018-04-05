@@ -1,6 +1,5 @@
 <launch>
     <arg name="stage_sim"   default="single_bot_empty.launch" />
-    <arg name="map_file"    default="$(find ssr_stage)/maps/stage_empty.yaml" />
     <arg name="waypoints"   default='0' />
     <arg name="robotName1"  default="dumper" />
 
