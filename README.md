@@ -25,7 +25,11 @@ AMCL (localization package) does not like to be run without some laser or other 
 
 ## Resources
 [ROS Navigation Wiki](http://wiki.ros.org/navigation/Tutorials/RobotSetup) - Only has instructions for single bot.
+
 [Multi Robot Package](https://github.com/gergia/multiple_turtlebots_stage_amcl/tree/master) - Works for 2 robots as far as I can tell.  This is what I am basing our implementation off of.  Does not solve issue of bots without sensors.
+
 [ROS Navigation_stage Package](http://wiki.ros.org/navigation_stage) - Has a multi-robot launch file, but it does not seem to work correctly.  Using the .rviz files (with edits) from here for visualization.
+
 [Forum Answer](https://answers.ros.org/question/41433/multiple-robots-simulation-and-navigation/) - Instructions on setting up a multi-robot system (uses gazebo).
+
 [ROS Distributed Mapping](http://wiki.ros.org/nav2d/Tutorials/DistributedMapping) - May help when we try to get SLAM working in a multi-robot system.  We will not be mapping with multiple robots, but this could be helpful.
