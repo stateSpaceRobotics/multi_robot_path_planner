@@ -1,59 +1,71 @@
 <launch>
+    <arg name="stage_sim"   default="multi_bot_empty.launch" />
+    <arg name="map_file"    default="$(find ssr_stage)/maps/stage_empty.yaml" />
+    <arg name="waypoints"   default='0' />
+    <arg name="robotName1"  default="robot_0" />
+    <arg name="robotName2"  default="robot_1" />
+    <arg name="robotName3"  default="robot_2" />
 
     <master auto="start"/>
     <param name="/use_sim_time" value="true"/>
 
-    <arg name="stage_sim" doc="specify a launch file from ssr_stage" default="multi_bot_empty.launch" />
-
-    <group ns="robot_1">
-        <!-- Localization through AMCL -->
-        <param name="tf_prefix" value="robot_1" />
-        <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml"/>
-
-        <!-- Move Base -->
-        <include file="$(find multi_robot_path_planner)/launch/move_base.launch" >
-            <arg name="config_path" value="$(find ssr_stage)/nav_config/dumper" />
-            <arg name="prefix" value="robot_1/" />
-        </include>
-
-        <remap from="map" to="/map" />
-    </group>
-
-    <group ns="robot_2">
-        <!-- Localization through AMCL -->
-        <param name="tf_prefix" value="robot_2" />
-        <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml"/>
-
-        <!-- Move Base -->
-        <include file="$(find multi_robot_path_planner)/launch/move_base.launch" >
-            <arg name="config_path" value="$(find ssr_stage)/nav_config/digger" />
-            <arg name="prefix" value="robot_2/" />
-        </include>
-
-        <remap from="map" to="/map" />
-    </group>
-
-    <group ns="robot_0">
-        <!-- Localization through AMCL -->
-        <param name="tf_prefix" value="robot_0" />
-        <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml"/>
-
-        <!-- Move Base -->
-        <include file="$(find multi_robot_path_planner)/launch/move_base.launch" >
-            <arg name="config_path" value="$(find ssr_stage)/nav_config/transporter" />
-            <arg name="prefix" value="robot_0/" />
-        </include>
-
-        <remap from="map" to="/map" />
-    </group>
-
     <!-- Mapping -->
-    <include file="$(find multi_robot_path_planner)/move_base_config/slam_gmapping.xml"/>
+    <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" respawn="false" >
+        <param name="frame_id" value="/map" />
+    </node>
 
     <!-- Stage -->
     <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
 
+    <!-- BEGIN ROBOT 0 (dumper)-->
+    <group ns="robot_0">
+        <param name="tf_prefix" value="$(arg robotName1)" />
+        <include file="$(find multi_robot_path_planner)/launch/single_robot.launch">
+            <arg name="namespace"       value="$(arg robotName1)"/>
+            <arg name="initial_pose_x"  value="1.3"/>
+            <arg name="initial_pose_y"  value="1.0"/>
+            <arg name="initial_pose_a"  value="0.0"/>
+            <arg name="environment"     value="stage" />
+            <arg name="robot"           value="dumper" />
+            <arg name="use_amcl"        value="true" />
+            <arg name="single_bot"      value="false"/>
+        </include>
+    </group>
+    <!-- END ROBOT 0 (dumper)-->
+
+    <!-- BEGIN ROBOT 1 (digger)-->
+    <group ns="robot_1">
+        <param name="tf_prefix" value="$(arg robotName1)" />
+        <include file="$(find multi_robot_path_planner)/launch/single_robot.launch">
+            <arg name="namespace"       value="$(arg robotName2)"/>
+            <arg name="initial_pose_x"  value="1.15"/>
+            <arg name="initial_pose_y"  value="1.3"/>
+            <arg name="initial_pose_a"  value="0.0"/>
+            <arg name="environment"     value="stage" />
+            <arg name="robot"           value="digger" />
+            <arg name="use_amcl"        value="true" />
+            <arg name="single_bot"      value="false"/>
+        </include>
+    </group>
+    <!-- END ROBOT 1 (digger)-->
+
+    <!-- BEGIN ROBOT 2 (transporter)-->
+    <group ns="robot_2">
+        <param name="tf_prefix" value="$(arg robotName1)" />
+        <include file="$(find multi_robot_path_planner)/launch/single_robot.launch">
+            <arg name="namespace"       value="$(arg robotName3)"/>
+            <arg name="initial_pose_x"  value="1.0"/>
+            <arg name="initial_pose_y"  value="1.0"/>
+            <arg name="initial_pose_a"  value="0.0"/>
+            <arg name="environment"     value="stage" />
+            <arg name="robot"           value="transporter" />
+            <arg name="use_amcl"        value="true" />
+            <arg name="single_bot"      value="false"/>
+        </include>
+    </group>
+    <!-- END ROBOT 2 (transporter)-->
+
     <!-- Visualization with RVIZ -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/single_robot.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/multi_robot.rviz" />
 
 </launch>
