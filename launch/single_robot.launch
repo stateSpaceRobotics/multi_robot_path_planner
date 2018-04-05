@@ -1,0 +1,36 @@
+<launch>
+    <arg name="namespace"           default="default_namespace" />
+    <arg name="initial_pose_x"      default="0" />
+    <arg name="initial_pose_y"      default="0" />
+    <arg name="initial_pose_a"      default="0" />
+    <arg name="environment"         default="." />
+    <arg name="robot"               default="." />
+    <arg name="use_amcl"            default="true" />
+    <arg name="single_bot"          default="false" />
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base_node" output="screen">
+        <remap from="map" to="/map" />
+        <param name="controller_frequency" value="10.0" />
+        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/base_local_planner_params.yaml" command="load" />
+
+        <remap from="cmd_vel" to="$(arg namespace)/cmd_vel" />
+        <remap from="odom" to="$(arg namespace)/odom" />
+        <remap from="base_pose_ground_truth" to="$(arg namespace)/base_pose_ground_truth" />
+    </node>
+
+    <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml" if="$(arg use_amcl)">
+        <arg name="tf_prefix"           value="$(arg namespace)" />
+        <arg name="scan_topic"          value="base_scan" />
+        <arg name="use_map_topic"       value="true" />
+        <arg name="initial_pose_x"      value="$(arg initial_pose_x)" />
+        <arg name="initial_pose_y"      value="$(arg initial_pose_y)" />
+        <arg name="initial_pose_a"      value="$(arg initial_pose_a)" />
+        <arg name="global_frame_id"     value="/map" />
+        <arg name="single_bot"          value="$(arg single_bot)" />
+    </include>
+
+</launch>
