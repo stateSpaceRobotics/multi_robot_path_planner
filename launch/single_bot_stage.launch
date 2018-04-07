@@ -16,16 +16,18 @@
     <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
 
     <!-- BEGIN ROBOT 0 (dumper)-->
-    <include file="$(find multi_robot_path_planner)/launch/single_robot.launch">
-        <arg name="namespace"       value="$(arg robotName1)"/>
-        <arg name="initial_pose_x"  value="1.0"/>
-        <arg name="initial_pose_y"  value="1.0"/>
-        <arg name="initial_pose_a"  value="0.0"/>
-        <arg name="environment"     value="stage" />
-        <arg name="robot"           value="dumper" />
-        <arg name="use_amcl"        value="true" />
-        <arg name="single_bot"      value="true"/>
-    </include>
+    <group ns="dumper">
+        <include file="$(find multi_robot_path_planner)/launch/single_robot.launch">
+            <arg name="namespace"       value="$(arg robotName1)"/>
+            <arg name="initial_pose_x"  value="1.0"/>
+            <arg name="initial_pose_y"  value="1.0"/>
+            <arg name="initial_pose_a"  value="0.0"/>
+            <arg name="environment"     value="stage" />
+            <arg name="robot"           value="dumper" />
+            <arg name="localization"    value="fake_localization" />
+            <arg name="single_bot"      value="true"/>
+        </include>
+    </group>
     <!-- END ROBOT 0 (dumper)-->
 
     <!-- Visualization with RVIZ -->

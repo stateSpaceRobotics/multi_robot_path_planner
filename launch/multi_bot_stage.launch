@@ -18,7 +18,7 @@
     <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
 
     <!-- BEGIN ROBOT 0 (dumper)-->
-    <group ns="robot_0">
+    <group ns="dumper">
         <param name="tf_prefix" value="$(arg robotName1)" />
         <include file="$(find multi_robot_path_planner)/launch/single_robot.launch">
             <arg name="namespace"       value="$(arg robotName1)"/>
@@ -27,14 +27,14 @@
             <arg name="initial_pose_a"  value="0.0"/>
             <arg name="environment"     value="stage" />
             <arg name="robot"           value="dumper" />
-            <arg name="use_amcl"        value="true" />
+            <arg name="localization"    value="fake_localization" />
             <arg name="single_bot"      value="false"/>
         </include>
     </group>
     <!-- END ROBOT 0 (dumper)-->
 
     <!-- BEGIN ROBOT 1 (digger)-->
-    <group ns="robot_1">
+    <group ns="digger">
         <param name="tf_prefix" value="$(arg robotName1)" />
         <include file="$(find multi_robot_path_planner)/launch/single_robot.launch">
             <arg name="namespace"       value="$(arg robotName2)"/>
@@ -43,14 +43,14 @@
             <arg name="initial_pose_a"  value="0.0"/>
             <arg name="environment"     value="stage" />
             <arg name="robot"           value="digger" />
-            <arg name="use_amcl"        value="true" />
+            <arg name="localization"    value="fake_localization" />
             <arg name="single_bot"      value="false"/>
         </include>
     </group>
     <!-- END ROBOT 1 (digger)-->
 
     <!-- BEGIN ROBOT 2 (transporter)-->
-    <group ns="robot_2">
+    <group ns="transporter">
         <param name="tf_prefix" value="$(arg robotName1)" />
         <include file="$(find multi_robot_path_planner)/launch/single_robot.launch">
             <arg name="namespace"       value="$(arg robotName3)"/>
@@ -59,7 +59,7 @@
             <arg name="initial_pose_a"  value="0.0"/>
             <arg name="environment"     value="stage" />
             <arg name="robot"           value="transporter" />
-            <arg name="use_amcl"        value="true" />
+            <arg name="localization"    value="fake_localization" />
             <arg name="single_bot"      value="false"/>
         </include>
     </group>

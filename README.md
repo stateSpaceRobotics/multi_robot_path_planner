@@ -19,10 +19,6 @@ This ROS catkin package implements a node that performs single- or multi-robot p
     - optional argument: map_file:=<map .yaml file in ssr_stage>
     - make sure that the map file is the one corresponding to the launch file you are using
 
-## Current issue:
-AMCL (localization package) does not like to be run without some laser or other sensor on a robot.  This is causing issues for the digger and transporter bots, as they have no sensors.
-
-
 ## Resources
 [ROS Navigation Wiki](http://wiki.ros.org/navigation/Tutorials/RobotSetup) - Only has instructions for single bot.
 

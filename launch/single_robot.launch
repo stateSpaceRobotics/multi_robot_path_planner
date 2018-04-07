@@ -5,9 +5,10 @@
     <arg name="initial_pose_a"      default="0" />
     <arg name="environment"         default="." />
     <arg name="robot"               default="." />
-    <arg name="use_amcl"            default="true" />
+    <arg name="localization"        default="amcl" />
     <arg name="single_bot"          default="false" />
 
+    <!-- Move Base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base_node" output="screen">
         <remap from="map" to="/map" />
         <param name="controller_frequency" value="10.0" />
@@ -22,13 +23,22 @@
         <remap from="base_pose_ground_truth" to="$(arg namespace)/base_pose_ground_truth" />
     </node>
 
-    <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml" if="$(arg use_amcl)">
+    <!-- AMCL -->
+    <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml" if="$(eval arg('localization') == 'amcl')">
         <arg name="tf_prefix"           value="$(arg namespace)" />
         <arg name="scan_topic"          value="base_scan" />
         <arg name="use_map_topic"       value="true" />
         <arg name="initial_pose_x"      value="$(arg initial_pose_x)" />
         <arg name="initial_pose_y"      value="$(arg initial_pose_y)" />
         <arg name="initial_pose_a"      value="$(arg initial_pose_a)" />
+        <arg name="global_frame_id"     value="/map" />
+        <arg name="single_bot"          value="$(arg single_bot)" />
+    </include>
+
+    <!-- Fake Localization-->
+    <include file="$(find multi_robot_path_planner)/move_base_config/fake_localization_node.xml" if="$(eval arg('localization') == 'fake_localization')">
+        <arg name="tf_prefix"           value="$(arg namespace)" />
+        <arg name="scan_topic"          value="base_scan" />
         <arg name="global_frame_id"     value="/map" />
         <arg name="single_bot"          value="$(arg single_bot)" />
     </include>

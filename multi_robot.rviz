@@ -3,7 +3,8 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 523
   - Class: rviz/Selection
@@ -48,7 +49,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 0: Global Plan"
+      Name: "Dumper: Global Plan"
       Offset:
         X: 0
         Y: 0
@@ -58,7 +59,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_0/move_base_node/TrajectoryPlannerROS/global_plan
+      Topic: /dumper/move_base_node/TrajectoryPlannerROS/global_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -71,7 +72,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 0: Local Plan"
+      Name: "Dumper: Local Plan"
       Offset:
         X: 0
         Y: 0
@@ -81,7 +82,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_0/move_base_node/TrajectoryPlannerROS/local_plan
+      Topic: /dumper/move_base_node/TrajectoryPlannerROS/local_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -94,7 +95,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 0: NavFn Plan"
+      Name: "Dumper: NavFn Plan"
       Offset:
         X: 0
         Y: 0
@@ -104,15 +105,15 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_0/move_base_node/NavfnROS/plan
+      Topic: /dumper/move_base_node/NavfnROS/plan
       Unreliable: false
       Value: true
     - Alpha: 1
       Class: rviz/Polygon
       Color: 255; 0; 0
       Enabled: true
-      Name: "Robot 0: Robot Footprint"
-      Topic: /robot_0/move_base_node/local_costmap/footprint
+      Name: "Dumper: Robot Footprint"
+      Topic: /dumper/move_base_node/local_costmap/footprint
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -125,7 +126,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 1: Global Plan"
+      Name: "Digger: Global Plan"
       Offset:
         X: 0
         Y: 0
@@ -135,7 +136,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_1/move_base_node/TrajectoryPlannerROS/global_plan
+      Topic: /digger/move_base_node/TrajectoryPlannerROS/global_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -148,7 +149,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 1: Local Plan"
+      Name: "Digger: Local Plan"
       Offset:
         X: 0
         Y: 0
@@ -158,7 +159,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_1/move_base_node/TrajectoryPlannerROS/local_plan
+      Topic: /digger/move_base_node/TrajectoryPlannerROS/local_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -171,7 +172,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 1: NavFn Plan"
+      Name: "Digger: NavFn Plan"
       Offset:
         X: 0
         Y: 0
@@ -181,15 +182,15 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_1/move_base_node/NavfnROS/plan
+      Topic: /digger/move_base_node/NavfnROS/plan
       Unreliable: false
       Value: true
     - Alpha: 1
       Class: rviz/Polygon
       Color: 255; 0; 0
       Enabled: true
-      Name: "Robot 1: Robot Footprint"
-      Topic: /robot_1/move_base_node/local_costmap/footprint
+      Name: "Digger: Robot Footprint"
+      Topic: /digger/move_base_node/local_costmap/footprint
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -202,7 +203,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 2: Global Plan"
+      Name: "Transporter: Global Plan"
       Offset:
         X: 0
         Y: 0
@@ -212,7 +213,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_2/move_base_node/TrajectoryPlannerROS/global_plan
+      Topic: /transporter/move_base_node/TrajectoryPlannerROS/global_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -225,7 +226,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 2: Local Plan"
+      Name: "Transporter: Local Plan"
       Offset:
         X: 0
         Y: 0
@@ -235,7 +236,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_2/move_base_node/TrajectoryPlannerROS/local_plan
+      Topic: /transporter/move_base_node/TrajectoryPlannerROS/local_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -248,7 +249,7 @@ Visualization Manager:
       Length: 0.300000012
       Line Style: Lines
       Line Width: 0.0299999993
-      Name: "Robot 2: NavFn Plan"
+      Name: "Transporter: NavFn Plan"
       Offset:
         X: 0
         Y: 0
@@ -258,22 +259,22 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /robot_2/move_base_node/NavfnROS/plan
+      Topic: /transporter/move_base_node/NavfnROS/plan
       Unreliable: false
       Value: true
     - Alpha: 1
       Class: rviz/Polygon
       Color: 255; 0; 0
       Enabled: true
-      Name: "Robot 2: Robot Footprint"
-      Topic: /robot_2/move_base_node/local_costmap/footprint
+      Name: "Transporter: Robot Footprint"
+      Topic: /transporter/move_base_node/local_costmap/footprint
       Unreliable: false
       Value: true
     - Class: rviz/TF
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        All Enabled: false
         map:
           Value: true
         robot_0/base_footprint:
@@ -281,19 +282,19 @@ Visualization Manager:
         robot_0/base_laser_link:
           Value: true
         robot_0/base_link:
-          Value: true
+          Value: false
         robot_0/odom:
           Value: true
         robot_1/base_footprint:
           Value: true
         robot_1/base_link:
-          Value: true
+          Value: false
         robot_1/odom:
           Value: true
         robot_2/base_footprint:
           Value: true
         robot_2/base_link:
-          Value: true
+          Value: false
         robot_2/odom:
           Value: true
       Marker Scale: 1
@@ -308,6 +309,14 @@ Visualization Manager:
               robot_0/base_link:
                 robot_0/base_laser_link:
                   {}
+          robot_1/odom:
+            robot_1/base_footprint:
+              robot_1/base_link:
+                {}
+          robot_2/odom:
+            robot_2/base_footprint:
+              robot_2/base_link:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -335,7 +344,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.100000001
       Style: Flat Squares
-      Topic: /robot_0/base_scan
+      Topic: /dumper/base_scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: false
@@ -365,16 +374,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10
+      Distance: 6.64610243
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.70982671
-        Y: 1.85277545
-        Z: 2.53201437
+        X: 1.54156101
+        Y: 0.69980675
+        Z: 1.06392407
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
