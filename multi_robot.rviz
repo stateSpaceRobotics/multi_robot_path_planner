@@ -11,8 +11,6 @@ Panels:
     Name: Selection
   - Class: rviz/Tool Properties
     Expanded:
-      - /2D Pose Estimate1
-      - /2D Nav Goal1
       - /Publish Point1
     Name: Tool Properties
     Splitter Ratio: 0.588679016
@@ -59,7 +57,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /dumper/move_base_node/TrajectoryPlannerROS/global_plan
+      Topic: /dumper/move_base/TrajectoryPlannerROS/global_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -82,7 +80,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /dumper/move_base_node/TrajectoryPlannerROS/local_plan
+      Topic: /dumper/move_base/TrajectoryPlannerROS/local_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -105,7 +103,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /dumper/move_base_node/NavfnROS/plan
+      Topic: /dumper/move_base/NavfnROS/plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -113,7 +111,7 @@ Visualization Manager:
       Color: 255; 0; 0
       Enabled: true
       Name: "Dumper: Robot Footprint"
-      Topic: /dumper/move_base_node/local_costmap/footprint
+      Topic: /dumper/move_base/local_costmap/footprint
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -136,7 +134,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /digger/move_base_node/TrajectoryPlannerROS/global_plan
+      Topic: /digger/move_base/TrajectoryPlannerROS/global_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -159,7 +157,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /digger/move_base_node/TrajectoryPlannerROS/local_plan
+      Topic: /digger/move_base/TrajectoryPlannerROS/local_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -182,7 +180,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /digger/move_base_node/NavfnROS/plan
+      Topic: /digger/move_base/NavfnROS/plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -190,7 +188,7 @@ Visualization Manager:
       Color: 255; 0; 0
       Enabled: true
       Name: "Digger: Robot Footprint"
-      Topic: /digger/move_base_node/local_costmap/footprint
+      Topic: /digger/move_base/local_costmap/footprint
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -213,7 +211,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /transporter/move_base_node/TrajectoryPlannerROS/global_plan
+      Topic: /transporter/move_base/TrajectoryPlannerROS/global_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -236,7 +234,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /transporter/move_base_node/TrajectoryPlannerROS/local_plan
+      Topic: /transporter/move_base/TrajectoryPlannerROS/local_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -259,7 +257,7 @@ Visualization Manager:
       Radius: 0.0299999993
       Shaft Diameter: 0.100000001
       Shaft Length: 0.100000001
-      Topic: /transporter/move_base_node/NavfnROS/plan
+      Topic: /transporter/move_base/NavfnROS/plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -267,7 +265,7 @@ Visualization Manager:
       Color: 255; 0; 0
       Enabled: true
       Name: "Transporter: Robot Footprint"
-      Topic: /transporter/move_base_node/local_costmap/footprint
+      Topic: /transporter/move_base/local_costmap/footprint
       Unreliable: false
       Value: true
     - Class: rviz/TF
@@ -363,10 +361,6 @@ Visualization Manager:
     - Class: rviz/Select
     - Class: rviz/FocusCamera
     - Class: rviz/Measure
-    - Class: rviz/SetInitialPose
-      Topic: /initialpose
-    - Class: rviz/SetGoal
-      Topic: /move_base_simple/goal
     - Class: rviz/PublishPoint
       Single click: true
       Topic: /clicked_point
