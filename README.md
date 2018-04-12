@@ -13,6 +13,34 @@ This file will read in the parameters from the parameter server and launch all o
 ## Notes
 The reason this is in feature/ros-lunar-parameterization is because, contrary to what the wiki currently shows, passing arguments through the roslaunch python api is first supported in lunar, not kinetic.  If desired, we can patch the required ros file (5-6 line edit; tested it on my machine and it works flawlessly) and run this on kinetic.
 
+## Patch
+File: /opt/ros/kinetic/lib/python2.7/dist-packages/roslaunch/config.py
+
+Insert the following lines after line 448:
+
+```python
+        if isinstance(f, tuple):
+            f, args = f
+        else:
+            args = None
+```
+
+And edit what is now line 455 from this:
+
+```python
+            loader.load(f, config, verbose=verbose)
+```
+
+To this:
+
+```python
+            loader.load(f, config, argv=args, verbose=verbose)
+```
+
+Optionally, you can change the docstring as well.  The pull request for this can be found [here](https://github.com/ros/ros_comm/pull/1115).
+
+And it was merged into lunar [here](https://github.com/ros/ros_comm/commit/9fcf216ac652ce19428bde0507c238aff3c49615).
+
 ## Resources
 [ROS Navigation Wiki](http://wiki.ros.org/navigation/Tutorials/RobotSetup) - Only has instructions for single bot.
 
