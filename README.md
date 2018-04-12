@@ -1,23 +1,17 @@
 # multi_robot_path_planner
 This ROS catkin package implements a node that performs single- or multi-robot pathfinding on an obstacle map.
 
-## single robot
- - single_bot_stage.launch
-    - launches navigation stack on a single robot with map_server providing a map, amcl providing localization, and rviz providing visuals and control via the ability to publish nav goals
-    - optional argument: stage_sim:=<launch file in ssr_stage>
-    - optional argument: map_file:=<map .yaml file in ssr_stage>
-    - make sure that the map file is the one corresponding to the launch file you are using
+## params.yaml
+Here is where all of the configuration is done.  You can specify whether or not to use rviz, what map provider to use, what environment (stage, gazebo, etc) to launch, and specify a list of robots of arbitrary size.  Look at the file to see the structure.  For now, these parameters must be loaded into the global namespace, but they are encapsulated in /navigation
 
- - single_bot_stage_gmapping.launch
-    - launches navigation stack on a single robot with gmapping providing a map and localization, and rviz providing visuals and control via the ability to publish nav goals
-    - optional argument: stage_sim:=<launch file in ssr_stage>
+## navigation.launch
+Run this launch file to upload the parameters to the parameter server and start the navigation node.
 
-## multi robot
- - multi_bot_stage.launch
-    - launches navigation stack on multiple robots with map_server providing a map, amcl providing localization, and rviz providing visuals
-    - optional argument: stage_sim:=<launch file in ssr_stage>
-    - optional argument: map_file:=<map .yaml file in ssr_stage>
-    - make sure that the map file is the one corresponding to the launch file you are using
+## launch_nav.py
+This file will read in the parameters from the parameter server and launch all of the required launch files with their given parameters.
+
+## Notes
+The reason this is in feature/ros-lunar-parameterization is because, contrary to what the wiki currently shows, passing arguments through the roslaunch python api is first supported in lunar, not kinetic.  If desired, we can patch the required ros file (5-6 line edit; tested it on my machine and it works flawlessly) and run this on kinetic.
 
 ## Resources
 [ROS Navigation Wiki](http://wiki.ros.org/navigation/Tutorials/RobotSetup) - Only has instructions for single bot.
