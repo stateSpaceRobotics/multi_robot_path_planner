@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 
         if (y == 1.5)
         {
-            y = 5.5;
+            y = 5.0;
         }
         else
         {
