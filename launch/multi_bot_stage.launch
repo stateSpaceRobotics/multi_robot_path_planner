@@ -65,6 +65,9 @@
     </group>
     <!-- END ROBOT 2 (transporter)-->
 
+    <node pkg="tf2_ros" type="static_transform_publisher" name="vive_to_map"
+    args="1.89 0  0  0 0 0 1  /map /vive" />
+
     <!-- Visualization with RVIZ -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/multi_robot.rviz" />
 
