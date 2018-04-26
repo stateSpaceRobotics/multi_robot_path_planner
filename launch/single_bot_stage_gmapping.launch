@@ -1,5 +1,5 @@
 <launch>
-    <arg name="stage_sim"   default="single_bot_empty.launch" />
+    <arg name="stage_sim"   default="single_bot_obstacles.launch" />
     <arg name="waypoints"   default='0' />
     <arg name="robotName1"  default="dumper" />
 

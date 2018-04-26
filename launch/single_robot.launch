@@ -12,9 +12,15 @@
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <remap from="map" to="/map" />
         <param name="controller_frequency" value="10.0" />
-        <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap">/$(arg namespace)/base_link</rosparam>
-        <rosparam param="global_frame" subst_value="True" ns="local_costmap">/$(arg namespace)/odom</rosparam>
-        <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap">/$(arg namespace)/base_link</rosparam>
+
+        <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" if="$(arg single_bot)">/base_link</rosparam>
+        <rosparam param="global_frame" subst_value="True" ns="local_costmap" if="$(arg single_bot)">/odom</rosparam>
+        <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" if="$(arg single_bot)">/base_link</rosparam>
+
+        <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" unless="$(arg single_bot)">/$(arg namespace)/base_link</rosparam>
+        <rosparam param="global_frame" subst_value="True" ns="local_costmap" unless="$(arg single_bot)">/$(arg namespace)/odom</rosparam>
+        <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" unless="$(arg single_bot)">/$(arg namespace)/base_link</rosparam>
+
         <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="global_costmap" />
         <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/local_costmap_params.yaml" command="load" />
