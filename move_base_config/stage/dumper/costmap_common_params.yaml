@@ -3,7 +3,7 @@ transform_tolerance: 1.0
 
 update_frequency: 5.0
 
-robot_radius: 0.1
+footprint: [[0.345, 0.335], [-0.345, 0.335], [-0.345, -0.335], [0.345, -0.335]]
 
 plugins: [
   {name: static_layer,    type: "costmap_2d::StaticLayer"},
@@ -11,4 +11,4 @@ plugins: [
 ]
 
 inflation_layer:
-  inflation_radius: 0.12
+  inflation_radius: 0.00
