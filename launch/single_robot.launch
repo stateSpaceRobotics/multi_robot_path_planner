@@ -7,24 +7,23 @@
     <arg name="robot"               default="." />
     <arg name="localization"        default="amcl" />
     <arg name="single_bot"          default="false" />
+    <arg name="map_topic"           default="/map1" />
 
     <!-- Move Base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-        <remap from="map" to="/map" />
+        <remap from="map" to="$(arg map_topic)" />
+
         <param name="controller_frequency" value="10.0" />
 
         <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" if="$(arg single_bot)">/base_link</rosparam>
-        <rosparam param="global_frame" subst_value="True" ns="local_costmap" if="$(arg single_bot)">/odom</rosparam>
         <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" if="$(arg single_bot)">/base_link</rosparam>
 
         <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" unless="$(arg single_bot)">/$(arg namespace)/base_link</rosparam>
-        <rosparam param="global_frame" subst_value="True" ns="local_costmap" unless="$(arg single_bot)">/$(arg namespace)/odom</rosparam>
         <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" unless="$(arg single_bot)">/$(arg namespace)/base_link</rosparam>
 
         <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="global_costmap" />
         <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/global_costmap_params.yaml" command="load" />
         <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/base_local_planner_params.yaml" command="load" />
     </node>
 
@@ -38,6 +37,7 @@
         <arg name="initial_pose_a"      value="$(arg initial_pose_a)" />
         <arg name="global_frame_id"     value="/map" />
         <arg name="single_bot"          value="$(arg single_bot)" />
+        <arg name="map_topic"           value="$(arg map_topic)" />
     </include>
 
     <!-- Fake Localization-->
@@ -46,6 +46,7 @@
         <arg name="scan_topic"          value="base_scan" />
         <arg name="global_frame_id"     value="/map" />
         <arg name="single_bot"          value="$(arg single_bot)" />
+        <arg name="map_topic"           value="$(arg map_topic)" />
     </include>
 
 </launch>

@@ -9,6 +9,7 @@
     <arg name="global_frame_id" default="map"/>
     <arg name="tf_prefix"       default="tf_p"/>
     <arg name="single_bot"      default="false" />
+    <arg name="map_topic"           default="/map1" />
 
     <node pkg="amcl" type="amcl" name="amcl">
         <param name="tf_broadcast"              value="true"/>
@@ -57,6 +58,6 @@
         <param name="initial_pose_y"            value="$(arg initial_pose_y)"/>
         <param name="initial_pose_a"            value="$(arg initial_pose_a)"/>
         <remap from="scan"                      to="$(arg scan_topic)"/>
-        <remap from="map"                       to="/map"/>
+        <remap from="map"                       to="$(arg map_topic)"/>
     </node>
 </launch>

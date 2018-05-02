@@ -34,6 +34,8 @@
     <!-- END ROBOT 0 (dumper)-->
 
     <!-- Visualization with RVIZ -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/single_robot.rviz" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/single_robot.rviz">
+        <remap from="/move_base_simple/goal" to="/dumper/move_base_simple/goal" />
+    </node>
 
 </launch>

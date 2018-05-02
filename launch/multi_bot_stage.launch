@@ -1,6 +1,7 @@
 <launch>
-    <arg name="stage_sim"   default="multi_bot_empty.launch" />
-    <arg name="map_file"    default="stage_empty.yaml" />
+    <arg name="stage_sim"   default="multi_bot_obstacles.launch" />
+    <arg name="map_file1"    default="stage_no_holes.yaml" />
+    <arg name="map_file2"    default="stage_obstacles.yaml" />
     <arg name="waypoints"   default='0' />
     <arg name="robotName1"  default="robot_0" />
     <arg name="robotName2"  default="robot_1" />
@@ -10,8 +11,14 @@
     <param name="/use_sim_time" value="true"/>
 
     <!-- Mapping -->
-    <node pkg="map_server" type="map_server" name="map_server" args="$(find ssr_stage)/maps/$(arg map_file)" respawn="false" >
+    <node pkg="map_server" type="map_server" name="map_server_1" args="$(find ssr_stage)/maps/$(arg map_file1)" respawn="false" >
         <param name="frame_id" value="/map" />
+        <remap from="map" to="map1" />
+    </node>
+
+    <node pkg="map_server" type="map_server" name="map_server_2" args="$(find ssr_stage)/maps/$(arg map_file2)" respawn="false" >
+        <param name="frame_id" value="/map" />
+        <remap from="map" to="map2" />
     </node>
 
     <!-- Stage -->
@@ -29,6 +36,7 @@
             <arg name="robot"           value="dumper" />
             <arg name="localization"    value="fake_localization" />
             <arg name="single_bot"      value="false"/>
+            <arg name="map_topic"       value="/map2" />
         </include>
     </group>
     <!-- END ROBOT 0 (dumper)-->
@@ -45,6 +53,7 @@
             <arg name="robot"           value="digger" />
             <arg name="localization"    value="fake_localization" />
             <arg name="single_bot"      value="false"/>
+            <arg name="map_topic"       value="/map1" />
         </include>
     </group>
     <!-- END ROBOT 1 (digger)-->
@@ -61,6 +70,7 @@
             <arg name="robot"           value="transporter" />
             <arg name="localization"    value="fake_localization" />
             <arg name="single_bot"      value="false"/>
+            <arg name="map_topic"       value="/map2" />
         </include>
     </group>
     <!-- END ROBOT 2 (transporter)-->
