@@ -3,7 +3,8 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /Map1
       Splitter Ratio: 0.5
     Tree Height: 490
   - Class: rviz/Selection
@@ -34,7 +35,7 @@ Visualization Manager:
       Draw Behind: false
       Enabled: true
       Name: Map
-      Topic: /map
+      Topic: /map1
       Unreliable: false
       Use Timestamp: false
       Value: true
