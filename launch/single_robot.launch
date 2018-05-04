@@ -13,7 +13,9 @@
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <remap from="map" to="$(arg map_topic)" />
 
-        <param name="controller_frequency" value="10.0" />
+        <param name="controller_frequency"  value="20.0" />
+        <param name="base_global_planner"   value="global_planner/GlobalPlanner" />
+        <param name="base_local_planner"    value="dwa_local_planner/DWAPlannerROS"/>
 
         <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" if="$(arg single_bot)">/base_link</rosparam>
         <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" if="$(arg single_bot)">/base_link</rosparam>
