@@ -1,6 +1,12 @@
 # multi_robot_path_planner
 This ROS catkin package implements a node that performs single- or multi-robot pathfinding on an obstacle map.
 
+### Installing dependencies
+To install dependencies, cd to your catkin_ws folder and run the following command:
+```sh
+rosdep install --from-paths ./ --ignore-src --rosdistro=kinetic
+```
+
 ### Architecture of Project (along with 2019_robot)
 The following two architecture diagrams show which packages launch which other packages and what they do. In the current architecture, multi_robot_path_planner provides many things that should be handled by 2019_robot. The proposed architecture moves these to 2019_robot in order to be more modular and focused on only navigation in this package.
 
