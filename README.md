@@ -1,5 +1,5 @@
 # multi_robot_path_planner
-This ROS catkin package implements a node that performs single- or multi-robot pathfinding on an obstacle map.
+This ROS catkin package implements a node that performs single- or multi-robot pathfinding on an obstacle map. It is currently a work in progress.
 
 ### Installing dependencies
 To install dependencies, cd to your catkin_ws folder and run the following command:
