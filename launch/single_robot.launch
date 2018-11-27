@@ -24,10 +24,10 @@
         <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" unless="$(arg single_bot)">/$(arg namespace)/base_link</rosparam>
         <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" unless="$(arg single_bot)">/$(arg namespace)/base_link</rosparam>
 
-        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="global_costmap" />
-        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find multi_robot_path_planner)/move_base_config/$(arg environment)/$(arg robot)/base_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find robot_config)/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find robot_config)/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find robot_config)/$(arg environment)/$(arg robot)/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find robot_config)/$(arg environment)/$(arg robot)/base_local_planner_params.yaml" command="load" />
     </node>
 
     <node pkg="multi_robot_path_planner" type="Recovery_State_Machine.py" name="move_base_recovery" output="screen">
