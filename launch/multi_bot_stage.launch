@@ -21,8 +21,7 @@
         <remap from="map" to="map2" />
     </node>
 
-    <!-- Stage -->
-    <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
+
 
     <!-- BEGIN ROBOT 0 (dumper)-->
     <group ns="dumper">

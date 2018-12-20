@@ -12,8 +12,7 @@
         <param name="frame_id" value="/map" />
     </node>
 
-    <!-- Stage -->
-    <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
+
 
     <!-- BEGIN ROBOT 0 (dumper)-->
     <group ns="dumper">
