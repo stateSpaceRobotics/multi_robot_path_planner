@@ -10,16 +10,7 @@
     <master auto="start"/>
     <param name="/use_sim_time" value="true"/>
 
-    <!-- Mapping -->
-    <node pkg="map_server" type="map_server" name="map_server_1" args="$(find ssr_stage)/maps/$(arg map_file1)" respawn="false" >
-        <param name="frame_id" value="/map" />
-        <remap from="map" to="map1" />
-    </node>
-
-    <node pkg="map_server" type="map_server" name="map_server_2" args="$(find ssr_stage)/maps/$(arg map_file2)" respawn="false" >
-        <param name="frame_id" value="/map" />
-        <remap from="map" to="map2" />
-    </node>
+    
 
     <!-- Stage -->
     <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
