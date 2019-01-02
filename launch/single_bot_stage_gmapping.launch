@@ -16,8 +16,7 @@
         <arg name="map_topic"       value="/map1" />
     </include>
 
-    <!-- Stage -->
-    <include file="$(find ssr_stage)/launch/$(arg stage_sim)" />
+
 
     <!-- BEGIN ROBOT 0 (dumper)-->
     <group ns="$(arg robotName1)">
