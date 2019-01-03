@@ -1,7 +1,4 @@
 <launch>
-    <arg name="stage_sim"   default="multi_bot_obstacles.launch" />
-    <arg name="map_file1"    default="stage_no_holes.yaml" />
-    <arg name="map_file2"    default="stage_obstacles.yaml" />
     <arg name="waypoints"   default='0' />
     <arg name="robotName1"  default="robot_0" />
     <arg name="robotName2"  default="robot_1" />
@@ -9,10 +6,6 @@
 
     <master auto="start"/>
     <param name="/use_sim_time" value="true"/>
-
-    
-
-
 
     <!-- BEGIN ROBOT 0 (dumper)-->
     <group ns="dumper">

@@ -1,15 +1,9 @@
 <launch>
-    <arg name="stage_sim"   default="single_bot_empty.launch" />
-    <arg name="map_file"    default="stage_empty.yaml" />
     <arg name="waypoints"   default='0' />
     <arg name="robotName1"  default="dumper" />
 
     <master auto="start"/>
     <param name="/use_sim_time" value="true"/>
-
-    
-
-
 
     <!-- BEGIN ROBOT 0 (dumper)-->
     <group ns="dumper">

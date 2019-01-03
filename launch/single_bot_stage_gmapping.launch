@@ -1,5 +1,4 @@
 <launch>
-    <arg name="stage_sim"   default="single_bot_obstacles.launch" />
     <arg name="waypoints"   default='0' />
     <arg name="robotName1"  default="dumper" />
 
@@ -15,8 +14,6 @@
         <arg name="single_bot"      value="true" />
         <arg name="map_topic"       value="/map1" />
     </include>
-
-
 
     <!-- BEGIN ROBOT 0 (dumper)-->
     <group ns="$(arg robotName1)">
