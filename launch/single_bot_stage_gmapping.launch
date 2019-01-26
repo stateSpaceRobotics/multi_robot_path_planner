@@ -12,7 +12,7 @@
         <arg name="map_frame"       value="/map"/>
         <arg name="tf_prefix"       value="$(arg robotName1)"/>
         <arg name="single_bot"      value="true" />
-        <arg name="map_topic"       value="/map1" />
+        <arg name="map_topic"       value="/map" />
     </include>
 
     <!-- BEGIN ROBOT 0 (dumper)-->
@@ -30,6 +30,6 @@
     </group>
     <!-- END ROBOT 0 (dumper)-->
 
-    
+
 
 </launch>
