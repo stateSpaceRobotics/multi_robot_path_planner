@@ -20,7 +20,6 @@
     </group>
     <!-- END ROBOT 0 (dumper)-->
 
-    <!-- Visualization with RVIZ -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find multi_robot_path_planner)/single_robot.rviz" />
+
 
 </launch>
