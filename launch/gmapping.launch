@@ -1,11 +1,12 @@
 <launch>
-    <arg name="map_frame" />
-    <arg name="map_topic" />
-    <arg name="odom_frame" />
-    <arg name="scan_topic" />
+    <arg name="map_frame"   default="/map" />
+    <arg name="map_topic"   default="/map" />
+    <arg name="odom_frame"  default="/odom" />
+    <arg name="scan_topic"  default="/scan" />
+    <arg name="node_name"   default="slam_gmapping" />
 
     <!-- Mapping -->
-    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <node pkg="gmapping" type="slam_gmapping" name="$(arg node_name)" output="screen">
         <param name="map_frame"             value="$(arg map_frame)"/>
         <param name="odom_frame"            value="$(arg odom_frame)" />
         <remap from="scan"                  to="$(arg scan_topic)"/>
