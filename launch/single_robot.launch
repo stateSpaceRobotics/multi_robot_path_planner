@@ -1,60 +1,63 @@
 <launch>
-    <arg name="namespace"           default="default_namespace" />
+    <arg name="namespace" />
     <arg name="initial_pose_x"      default="0" />
     <arg name="initial_pose_y"      default="0" />
     <arg name="initial_pose_a"      default="0" />
-    <arg name="environment"         default="." />
-    <arg name="robot"               default="." />
-    <arg name="localization"        default="amcl" />
-    <arg name="single_bot"          default="false" />
-    <arg name="map_topic"           default="/map1" />
+    <arg name="map_topic" />
+    <arg name="move_base_config_package" />
+    <arg name="move_base_config_path" />
+    <arg name="localization_package" />
+    <arg name="localization_footprint_frame" />
+    <arg name="scan_topic" />
+    <arg name="map_frame" />
+    <arg name="odom_frame" />
+    <arg name="base_frame" />
+    <!-- <arg name="tf_prefix" /> -->
 
-    <!-- Move Base -->
-    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-        <remap from="map" to="$(arg map_topic)" />
+    <group ns="$(arg namespace)">
+        <!-- Move Base -->
+        <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+            <remap from="map" to="$(arg map_topic)" />
 
-        <param name="controller_frequency"          value="20.0" />
-        <param name="base_global_planner"           value="global_planner/GlobalPlanner" />
-        <param name="base_local_planner"            value="dwa_local_planner/DWAPlannerROS"/>
-        <param name="recovery_behavior_enabled"     value="False"/>
+            <param name="controller_frequency"          value="20.0" />
+            <param name="base_global_planner"           value="global_planner/GlobalPlanner" />
+            <param name="base_local_planner"            value="dwa_local_planner/DWAPlannerROS"/>
+            <param name="recovery_behavior_enabled"     value="False"/>
 
-        <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" if="$(arg single_bot)">/base_link</rosparam>
-        <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" if="$(arg single_bot)">/base_link</rosparam>
+            <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" >/$(arg base_frame)</rosparam>
+            <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" >/$(arg base_frame)</rosparam>
 
-        <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" unless="$(arg single_bot)">/$(arg namespace)/base_link</rosparam>
-        <rosparam param="robot_base_frame" subst_value="True" ns="local_costmap" unless="$(arg single_bot)">/$(arg namespace)/base_link</rosparam>
+            <rosparam file="$(eval find(move_base_config_package) + '/' + move_base_config_path + '/costmap_common_params.yaml')" command="load" ns="global_costmap" />
+            <rosparam file="$(eval find(move_base_config_package) + '/' + move_base_config_path + '/costmap_common_params.yaml')" command="load" ns="local_costmap" />
+            <rosparam file="$(eval find(move_base_config_package) + '/' + move_base_config_path + '/local_costmap_params.yaml')" command="load" />
+            <rosparam file="$(eval find(move_base_config_package) + '/' + move_base_config_path + '/global_costmap_params.yaml')" command="load" />
+            <rosparam file="$(eval find(move_base_config_package) + '/' + move_base_config_path + '/base_local_planner_params.yaml')" command="load" />
+        </node>
 
-        <rosparam file="$(find robot_config)/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="global_costmap" />
-        <rosparam file="$(find robot_config)/$(arg environment)/$(arg robot)/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find robot_config)/$(arg environment)/$(arg robot)/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find robot_config)/$(arg environment)/$(arg robot)/base_local_planner_params.yaml" command="load" />
-    </node>
+        <node pkg="multi_robot_path_planner" type="Recovery_State_Machine.py" name="move_base_recovery" output="screen">
+            <rosparam param="topic" subst_value="True">/$(arg namespace)/move_base</rosparam>
+            <rosparam param="base_frame" subst_value="True">/$(arg base_frame)</rosparam>
+        </node>
 
-    <node pkg="multi_robot_path_planner" type="Recovery_State_Machine.py" name="move_base_recovery" output="screen">
-        <rosparam param="topic" subst_value="True">/$(arg robot)/move_base</rosparam>
-        <rosparam param="base_frame" subst_value="True">/$(arg namespace)/base_link</rosparam>
-    </node>
+        <!-- AMCL -->
+        <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml" if="$(eval arg('localization_package') == 'amcl')">
+            <!-- <arg name="tf_prefix"           value="$(arg tf_prefix)" /> -->
+            <arg name="scan_topic"          value="$(arg scan_topic)" />
+            <arg name="use_map_topic"       value="true" />
+            <arg name="initial_pose_x"      value="$(arg initial_pose_x)" />
+            <arg name="initial_pose_y"      value="$(arg initial_pose_y)" />
+            <arg name="initial_pose_a"      value="$(arg initial_pose_a)" />
+            <arg name="global_frame_id"     value="$(map_frame)" />
+            <arg name="map_topic"           value="$(arg map_topic)" />
+        </include>
 
-    <!-- AMCL -->
-    <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml" if="$(eval arg('localization') == 'amcl')">
-        <arg name="tf_prefix"           value="$(arg namespace)" />
-        <arg name="scan_topic"          value="base_scan" />
-        <arg name="use_map_topic"       value="true" />
-        <arg name="initial_pose_x"      value="$(arg initial_pose_x)" />
-        <arg name="initial_pose_y"      value="$(arg initial_pose_y)" />
-        <arg name="initial_pose_a"      value="$(arg initial_pose_a)" />
-        <arg name="global_frame_id"     value="/map" />
-        <arg name="single_bot"          value="$(arg single_bot)" />
-        <arg name="map_topic"           value="$(arg map_topic)" />
-    </include>
-
-    <!-- Fake Localization-->
-    <include file="$(find multi_robot_path_planner)/move_base_config/fake_localization_node.xml" if="$(eval arg('localization') == 'fake_localization')">
-        <arg name="tf_prefix"           value="$(arg namespace)" />
-        <arg name="scan_topic"          value="base_scan" />
-        <arg name="global_frame_id"     value="/map" />
-        <arg name="single_bot"          value="$(arg single_bot)" />
-        <arg name="map_topic"           value="$(arg map_topic)" />
-    </include>
-
+        <!-- Fake Localization-->
+        <include file="$(find multi_robot_path_planner)/move_base_config/fake_localization_node.xml" if="$(eval arg('localization_package') == 'fake_localization')">
+            <arg name="scan_topic"          value="$(arg scan_topic)" />
+            <arg name="global_frame_id"     value="$(arg map_frame)" />
+            <arg name="map_topic"           value="$(arg map_topic)" />
+            <arg name="odom_frame_id"       value="$(arg odom_frame)" />
+            <arg name="base_frame_id"       value="$(arg localization_footprint_frame)" />
+        </include>
+    </group>
 </launch>
