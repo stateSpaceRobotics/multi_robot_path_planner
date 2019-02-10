@@ -39,16 +39,13 @@
             <rosparam param="base_frame" subst_value="True">/$(arg base_frame)</rosparam>
         </node>
 
-        <!-- AMCL -->
-        <include file="$(find multi_robot_path_planner)/move_base_config/amcl_node.xml" if="$(eval arg('localization_package') == 'amcl')">
-            <!-- <arg name="tf_prefix"           value="$(arg tf_prefix)" /> -->
-            <arg name="scan_topic"          value="$(arg scan_topic)" />
-            <arg name="use_map_topic"       value="true" />
-            <arg name="initial_pose_x"      value="$(arg initial_pose_x)" />
-            <arg name="initial_pose_y"      value="$(arg initial_pose_y)" />
-            <arg name="initial_pose_a"      value="$(arg initial_pose_a)" />
-            <arg name="global_frame_id"     value="$(map_frame)" />
-            <arg name="map_topic"           value="$(arg map_topic)" />
+        <!-- Robot Localization -->
+        <include file="$(find multi_robot_path_planner)/move_base_config/robot_localization.xml" if="$(eval arg('localization_package') == 'robot_localization')">
+            <arg name="map_frame"       value="$(arg map_frame)" />
+            <arg name="odom_frame"      value="$(arg odom_frame)" />
+            <arg name="base_link_frame" value="$(arg base_frame)" />
+            <arg name="world_frame"     value="$(arg map_frame)" />
+            <arg name="vive_topic"      value="$(arg scan_topic)" />
         </include>
 
         <!-- Fake Localization-->

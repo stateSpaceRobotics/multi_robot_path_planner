@@ -77,6 +77,7 @@
   <exec_depend>move_base_msgs</exec_depend>
   <exec_depend>nav_core</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
   <exec_depend>rotate_recovery</exec_depend>
   <exec_depend>std_msgs</exec_depend>
 
