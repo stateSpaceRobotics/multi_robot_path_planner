@@ -22,7 +22,7 @@
 
             <param name="controller_frequency"          value="20.0" />
             <param name="base_global_planner"           value="global_planner/GlobalPlanner" />
-            <param name="base_local_planner"            value="dwa_local_planner/DWAPlannerROS"/>
+            <param name="base_local_planner"            value="base_local_planner/TrajectoryPlannerROS"/>
             <param name="recovery_behavior_enabled"     value="False"/>
 
             <rosparam param="robot_base_frame" subst_value="True" ns="global_costmap" >/$(arg localization_footprint_frame)</rosparam>
